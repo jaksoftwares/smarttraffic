@@ -3,12 +3,8 @@ import { ArrowLeft, CalendarDays, User, Bookmark } from 'lucide-react';
 import blogPosts from '../blogposts';
 import Link from 'next/link';
 
-
-// Define the proper PageProps interface
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
   searchParams?: {
     [key: string]: string | string[] | undefined;
   };
@@ -20,20 +16,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: PageProps) {
-  // Extract ID from slug
-  const postId = parseInt(params.slug.split('-')[0]);
+export default async function BlogPostPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const postId = parseInt(resolvedParams.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
 
-  if (!post) {
-    return notFound();
-  }
+  if (!post) return notFound();
 
-  // Generate share links
   const shareLinks = {
-    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://smarttraffic.ai/blogs/${params.slug}`)}`,
-    linkedin: `https://www.linkedin.com/shareArticle?mini=true&title=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://smarttraffic.ai/blogs/${params.slug}`)}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://smarttraffic.ai/blogs/${params.slug}`)}`
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://smarttraffic.ai/blogs/${resolvedParams.slug}`)}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&title=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://smarttraffic.ai/blogs/${resolvedParams.slug}`)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://smarttraffic.ai/blogs/${resolvedParams.slug}`)}`
   };
 
   return (
@@ -180,7 +173,8 @@ export default function BlogPostPage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const postId = parseInt(params.slug.split('-')[0]);
+  const resolvedParams = await params;
+  const postId = parseInt(resolvedParams.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
 
   if (!post) {
@@ -193,11 +187,11 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${post.title} | SmartTraffic AI Blog`,
     description: post.description,
-    keywords: post.keywords.join(', '),
+    keywords: post.keywords?.join(', '),
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://smarttraffic.ai/blogs/${params.slug}`,
+      url: `https://smarttraffic.ai/blogs/${resolvedParams.slug}`,
       type: 'article',
       publishedTime: new Date(post.date).toISOString(),
       authors: [post.author],
