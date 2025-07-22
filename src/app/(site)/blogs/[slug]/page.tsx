@@ -5,9 +5,7 @@ import Link from 'next/link';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateStaticParams() {
@@ -18,6 +16,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: PageProps) {
   const resolvedParams = await params;
+
   const postId = parseInt(resolvedParams.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
 
@@ -28,7 +27,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     linkedin: `https://www.linkedin.com/shareArticle?mini=true&title=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://smarttraffic.ai/blogs/${resolvedParams.slug}`)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://smarttraffic.ai/blogs/${resolvedParams.slug}`)}`
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black relative overflow-hidden">
       {/* Animated Background */}
@@ -176,7 +174,6 @@ export async function generateMetadata({ params }: PageProps) {
   const resolvedParams = await params;
   const postId = parseInt(resolvedParams.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
-
   if (!post) {
     return {
       title: 'Article Not Found',
