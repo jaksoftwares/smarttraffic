@@ -3,9 +3,14 @@ import { ArrowLeft, CalendarDays, User, Bookmark } from 'lucide-react';
 import blogPosts from '../blogposts';
 import Link from 'next/link';
 
-interface BlogPostPageProps {
+
+// Define the proper PageProps interface
+interface PageProps {
   params: {
     slug: string;
+  };
+  searchParams?: {
+    [key: string]: string | string[] | undefined;
   };
 }
 
@@ -15,7 +20,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: PageProps) {
   // Extract ID from slug
   const postId = parseInt(params.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
@@ -174,7 +179,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   );
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: PageProps) {
   const postId = parseInt(params.slug.split('-')[0]);
   const post = blogPosts.find(p => p.id === postId);
 
