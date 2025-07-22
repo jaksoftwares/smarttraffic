@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Linkedin, Twitter, Crown, Users, Code, Database, Brain, BarChart3 } from "lucide-react";
+import { Linkedin, Twitter, Crown, Users, Code, BarChart3 } from "lucide-react";
 
 const teamMembers = [
   {
@@ -69,45 +69,45 @@ const teamMembers = [
     iconColor: "text-purple-400",
     hoverBorder: "hover:border-purple-400/50"
   },
-  {
-    name: "Allan Canon",
-    role: "AI Developer",
-    image: "/images/profile.jpg",
-    bio: "Developing machine learning models for intelligent traffic prediction and optimization.",
-    linkedin: "#",
-    twitter: "#",
-    icon: Brain,
-    color: "from-red-500/20 to-orange-500/20",
-    borderColor: "border-red-400/30",
-    iconColor: "text-red-400",
-    hoverBorder: "hover:border-red-400/50"
-  },
-  {
-    name: "John Kibet",
-    role: "AI Developer",
-    image: "/images/profile.jpg",
-    bio: "Turning traffic data into actionable insights through advanced AI algorithms.",
-    linkedin: "#",
-    twitter: "#",
-    icon: Brain,
-    color: "from-indigo-500/20 to-blue-500/20",
-    borderColor: "border-indigo-400/30",
-    iconColor: "text-indigo-400",
-    hoverBorder: "hover:border-indigo-400/50"
-  },
-  {
-    name: "Derrick Gacheru",
-    role: "AI Developer",
-    image: "/images/profile.jpg",
-    bio: "Spreading awareness and driving SmartTraffic AI adoption through innovative solutions.",
-    linkedin: "#",
-    twitter: "#",
-    icon: Database,
-    color: "from-cyan-500/20 to-teal-500/20",
-    borderColor: "border-cyan-400/30",
-    iconColor: "text-cyan-400",
-    hoverBorder: "hover:border-cyan-400/50"
-  },
+  // {
+  //   name: "Allan Canon",
+  //   role: "AI Developer",
+  //   image: "/images/profile.jpg",
+  //   bio: "Developing machine learning models for intelligent traffic prediction and optimization.",
+  //   linkedin: "#",
+  //   twitter: "#",
+  //   icon: Brain,
+  //   color: "from-red-500/20 to-orange-500/20",
+  //   borderColor: "border-red-400/30",
+  //   iconColor: "text-red-400",
+  //   hoverBorder: "hover:border-red-400/50"
+  // },
+  // {
+  //   name: "John Kibet",
+  //   role: "AI Developer",
+  //   image: "/images/profile.jpg",
+  //   bio: "Turning traffic data into actionable insights through advanced AI algorithms.",
+  //   linkedin: "#",
+  //   twitter: "#",
+  //   icon: Brain,
+  //   color: "from-indigo-500/20 to-blue-500/20",
+  //   borderColor: "border-indigo-400/30",
+  //   iconColor: "text-indigo-400",
+  //   hoverBorder: "hover:border-indigo-400/50"
+  // },
+  // {
+  //   name: "Derrick Gacheru",
+  //   role: "AI Developer",
+  //   image: "/images/profile.jpg",
+  //   bio: "Spreading awareness and driving SmartTraffic AI adoption through innovative solutions.",
+  //   linkedin: "#",
+  //   twitter: "#",
+  //   icon: Database,
+  //   color: "from-cyan-500/20 to-teal-500/20",
+  //   borderColor: "border-cyan-400/30",
+  //   iconColor: "text-cyan-400",
+  //   hoverBorder: "hover:border-cyan-400/50"
+  // },
 ];
 
 export default function TeamSection() {
